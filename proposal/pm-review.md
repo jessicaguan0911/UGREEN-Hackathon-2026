@@ -56,3 +56,10 @@ These are the answers to the 30 critical PM questions. Each decision will be app
 - **Repositioning:** "The report does the asking, so friends don't have to." A neutral, fully traceable report removes the awkwardness.
 - **PDF Q2 draft:** "The real pain isn't the math. It's the awkwardness: people hesitate to ask friends for money they're owed, and those who owe feel uneasy without knowing the exact amount."
 - **Rejected:** a ready-to-send group-chat message in the report. The entrant declined it.
+
+## Q2 and Q3: Who is the real user?
+- **Decision:** B and C.
+  - **B:** roommates or housemates who share one NAS. Everyone has an account, uploads to the shared album, and can open the report.
+  - **C:** friend groups where one person owns the NAS. Friends send their photos to the owner, who uploads them. The owner shares the report with the group manually, for example with a screenshot. The Skill itself never shares anything.
+- **Out of scope:** families. "Families don't split bills."
+- **Q3 (overlap between NAS owners and people who split trip costs):** answered by this. The target is NAS owners who live or travel with peers, not households of parents and children.
