@@ -48,3 +48,11 @@ These are the answers to the 30 critical PM questions. Each decision will be app
 - **Follow-ups:**
   - Friends who appear in photos must agree to be shown in the public video.
   - Upload all test data at the very start of the testing day, so that photo indexing (faces, places, OCR) has time to finish.
+
+## Q1: Is the pain real?
+- **Answer:** yes, from the entrant's own experience and from friends. The real pain is social, not arithmetic:
+  - People hesitate to ask friends for money they are owed.
+  - People who owe money feel uneasy because they cannot easily work out the exact amount.
+- **Repositioning:** "The report does the asking, so friends don't have to." A neutral, fully traceable report removes the awkwardness.
+- **PDF Q2 draft:** "The real pain isn't the math. It's the awkwardness: people hesitate to ask friends for money they're owed, and those who owe feel uneasy without knowing the exact amount."
+- **Rejected:** a ready-to-send group-chat message in the report. The entrant declined it.
