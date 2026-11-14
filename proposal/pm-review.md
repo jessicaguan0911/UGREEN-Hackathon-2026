@@ -19,3 +19,10 @@ These are the answers to the 30 critical PM questions. Each decision will be app
 - **Fallback:** if photos have no location data, group by day only.
 - **Future plan:** reconcile against a credit-card statement PDF that the user downloads and saves to the NAS. No bank connection is needed.
 - **Pitch value:** only the NAS holds both the photos and the receipts, which strengthens the answer to Q21 ("why not ChatGPT?").
+
+## Q18: Is the album feature just filler?
+- **Decision:** keep the albums (option A). Money and memories together tell the complete "trip wrap-up" story.
+- **Framing to avoid looking stapled on:** the Skill builds one day × place index of the trip. It serves two purposes:
+  1. Spotting missing receipts (Q14).
+  2. Creating the albums.
+- One engine produces two outputs, so the albums reuse the work the settle-up already needs.
