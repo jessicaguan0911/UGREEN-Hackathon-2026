@@ -30,3 +30,21 @@ These are the answers to the 30 critical PM questions. Each decision will be app
 ## Q19: Receipts leaking into the albums
 - **Decision:** option B. If photo-agent cannot leave receipt photos out of an album, stop and ask the user, for example: "The Lake Louise album would include 3 receipts. Create it anyway?"
 - **Status:** SKILL.md Step 6 already does this. No change needed.
+
+## Q21: Why not just use ChatGPT?
+- **Headline:** "ChatGPT can do the math once you've done the work. Trip Wrap-Up does the work."
+- **Supporting points:**
+  1. Finding the receipts: they are scattered across 300 photos and four phones, and the NAS finds them in the shared album.
+  2. Photos as reminders: "87 photos at Lake Louise, 0 receipts" can only be noticed by a NAS that holds both.
+  3. Traceability: every amount links to its source photo, and balances pass a zero-sum check.
+  4. Privacy: receipts with card digits never leave home.
+  5. Albums come free: the same day × place index builds the trip albums.
+- **PDF:** lead Q5 with the headline, then compress the points into one sentence.
+
+## Q23: Where does the Finalist test data come from?
+- **Decision:** options A and B.
+  - Use the entrant's own real trip photos, only on the test NAS. Mask card digits and other personal details in the demo video.
+  - Start collecting a small "test trip" now: receipts plus photos taken at the same places, including at least one duplicate receipt photo and one blurry receipt for the edge case.
+- **Follow-ups:**
+  - Friends who appear in photos must agree to be shown in the public video.
+  - Upload all test data at the very start of the testing day, so that photo indexing (faces, places, OCR) has time to finish.
