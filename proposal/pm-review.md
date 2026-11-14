@@ -63,3 +63,4 @@ These are the answers to the 30 critical PM questions. Each decision will be app
   - **C:** friend groups where one person owns the NAS. Friends send their photos to the owner, who uploads them. The owner shares the report with the group manually, for example with a screenshot. The Skill itself never shares anything.
 - **Out of scope:** families. "Families don't split bills."
 - **Q3 (overlap between NAS owners and people who split trip costs):** answered by this. The target is NAS owners who live or travel with peers, not households of parents and children.
+- **Update (assumption):** every trip member has an account on the same NAS. The owner creates accounts for friends if needed. Everyone uploads to the shared album and can open the saved report on the NAS, so no screenshots are needed. List this assumption under Known limitations.
