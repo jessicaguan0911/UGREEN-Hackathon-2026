@@ -26,3 +26,7 @@ These are the answers to the 30 critical PM questions. Each decision will be app
   1. Spotting missing receipts (Q14).
   2. Creating the albums.
 - One engine produces two outputs, so the albums reuse the work the settle-up already needs.
+
+## Q19: Receipts leaking into the albums
+- **Decision:** option B. If photo-agent cannot leave receipt photos out of an album, stop and ask the user, for example: "The Lake Louise album would include 3 receipts. Create it anyway?"
+- **Status:** SKILL.md Step 6 already does this. No change needed.
