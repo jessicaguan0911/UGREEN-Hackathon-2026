@@ -17,6 +17,7 @@ Local development utilities, which are not Skill runtime dependencies:
 | Tool | Source | License or terms |
 |---|---|---|
 | OpenAI Codex | https://openai.com/codex/ | Applicable OpenAI terms |
+| OpenAI image generation, for project cover images | https://openai.com/ | Applicable OpenAI terms; not a Skill runtime dependency |
 | Python | https://www.python.org/ | PSF License |
 | Node.js | https://nodejs.org/ | MIT license |
 | ReportLab 4.4.9 | https://www.reportlab.com/ | BSD license, as stated in its package metadata |
@@ -26,6 +27,8 @@ Local development utilities, which are not Skill runtime dependencies:
 ## AI assistance
 
 Codex helped review the idea, write and revise the Skill and proposal, identify edge cases, and prepare the local validation and packaging tools. It also checked word counts and package contents and ran the official checker. The entrant confirmed that Codex and the official UGREEN package were the only AI/Skill-assistance products used. The UGREEN package supplied instructions and capability information; it is not a separate AI model.
+
+OpenAI image generation was later used through Codex to create and revise the project cover images. These illustrate the proposed workflow; they are not screenshots or evidence of NAS execution. Cover images are outside the Skill ZIP.
 
 Codex is a development tool, not a runtime service for the Skill. It has not run this project on a NAS or submitted the entry.
 
