@@ -9,6 +9,8 @@ Let a neutral report do the asking after a trip: members photograph receipts dur
 
 Version: 0.2.1. This is a Round 1 orchestration package; device behavior has not yet been tested. See [capability notes](references/capability-boundaries.md), [test plan](references/validation-plan.md), and [development and AI disclosure](references/disclosures.md).
 
+For setup, required inputs and everyday use, see the [README](references/README.md).
+
 - Two to eight members, each with an account on the same NAS. Only the invoking account's authorized content is accessible; membership does not grant access to other members' private libraries or the report folder.
 - Equal shares among all members; whole personal receipts are excluded. Ask the user to separate mixed personal/shared items into confirmed entries without double counting. Unequal/subgroup splits and refunds are unsupported.
 - One settlement currency with two decimal places. Foreign receipts require user-confirmed rates. Other settlement precisions, payments, bank connections and messaging are unsupported.

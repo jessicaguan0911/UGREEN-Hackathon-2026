@@ -2,52 +2,54 @@
 
 UGREEN Hackathon 2026 · Automate Your Workflow
 
-## 1. What does the Skill do?
+Submitted by: Jiayi Guan
 
-It turns receipt photos snapped during a trip into a report showing exactly who pays whom, then optionally organizes the trip photos into albums.
+## 1. Skill purpose
 
-## 2. Who is the target user and problem?
+Receipt photos become a report showing exactly who pays whom, with optional trip albums.
 
-The target users are roommates and friend groups who share a UGREEN NAS. The real pain is the awkwardness: people hesitate to ask friends for money they are owed, and those who owe feel uneasy without knowing the exact amount.
+## 2. Users and problem
 
-## 3. What is your proposed solution?
+Roommates and friends sharing a NAS hesitate to ask for repayment. Those who owe also feel uneasy without a clear amount. After trips, reconstructing expenses from banking screenshots takes time and invites mistakes. Those who owe may forget while waiting for the final calculation.
 
-No one wants to keep score on vacation. Members snap receipts and upload their photos to the shared NAS. Afterwards, the Skill finds receipts, asks for missing details, and saves a neutral, traceable report, so the report does the asking.
+## 3. Proposed solution
 
-## 4. What is the Core User Flow?
+No one wants to keep score on vacation. Members photograph receipts and upload trip photos. Afterwards, the Skill finds candidates, requests missing details and saves a neutral, traceable report, so the report does the asking.
+
+## 4. User flow
 
 1. Confirm dates, members, currency, payment mode and photo scope.
-2. Find receipts and build separate daily and whole-trip place summaries.
-3. Review gaps such as "Lake Louise: 87 photos, 0 confirmed receipts", unreadable receipts, duplicates, payers, personal expenses and rates.
-4. Confirm and save the report, with transfers on top.
-5. Optionally create albums from the same trip information.
+2. Find receipts; review daily and whole-trip place summaries.
+3. Confirm gaps, duplicates, unreadable receipts, payers, personal expenses and rates.
+4. Save the confirmed report with transfers first.
+5. Optionally create albums.
 
-## 5. What substantive difference does your idea offer?
+## 5. What makes it different?
 
-A chatbot can split bills once someone has collected the inputs. Trip Wrap-Up searches authorized NAS uploads, uses photos to prompt missing-expense review, and retains each receipt's source. Unknown details require confirmation. A day or place with no receipts prompts a question, not an invented expense.
+A chatbot needs someone to collect its inputs. This Skill searches authorized NAS uploads and uses photos to prompt missing-expense review. Every receipt retains its source. Unknown details require confirmation. If day three has photos but no confirmed receipts, it asks whether anyone spent money that day.
 
-## 6. Which UGREEN AI NAS capabilities will be used, and at which step?
+## 6. NAS capabilities
 
-Photo-agent uses ug-photo search-picture for capture dates, locations and OCR text; search-screen for content and upload-time filtering; vision-ocr for eligible fallback images; and create-album for albums. Document-agent uses ug-document extract with receipt schema and dedupe. Knowledge-agent uses ug-knowledge save-text for the report.
+Photo-agent uses ug-photo search-picture for capture dates, locations and OCR text; search-screen for content and upload dates; vision-ocr for eligible fallbacks; create-album for albums. Document-agent extracts receipts through ug-document; knowledge-agent saves reports through ug-knowledge.
 
-## 7. What was your technical approach?
+## 7. Technical approach
 
-A Markdown-only Skill follows Uliya and delegates to three registered experts, without NAS scripts. Missing capture times use an approved upload window. Writes require platform approval. Settlement uses integer cents, fixed remainder allocation, total and balance checks, and greedy matching with at most n-1 transfers. The intended workflow uses the NAS-local model without external services.
+The Markdown Skill follows Uliya and delegates to three experts without NAS scripts. Writes require approval. Settlement uses integer cents, fixed rounding, balance checks and at most n-1 transfers. The intended local-model workflow uses no external services. Photos missing capture dates use an approved upload window and need user confirmation before joining the trip. Checks reconcile ledger totals, paid amounts, shares and balances after transfers.
 
-## 8. What is the current development status?
+## 8. Development status
 
-SKILL.md and five references are written; official checks return static-pass with zero errors or warnings. A separate arithmetic model passes seven known cases and 20,000 synthetic trips. NAS installation, image extraction, search coverage, location grouping and local-model routing remain untested.
+SKILL.md and six references are written. Official checks pass with zero errors or warnings. A separate arithmetic model passes seven known cases and 20,000 synthetic trips. NAS execution, extraction, search coverage and model routing remain untested.
 
-## 9. What is your final validation plan?
+## 9. Validation plan
 
-Core one: four members, fifteen receipts among 300 photos; expect CAD 800, three transfers and missing-expense review. Core two: one payer, USD/CAD receipts; expect CAD 100 with a rounding remainder. Edge case: duplicate, blurry and forwarded undated images must prompt review without double counting or invented values.
+Core one: four members, fifteen receipts among 300 photos; expect CAD 800 and three transfers. Core two: one payer, USD/CAD receipts; expect CAD 100 with rounding. Edge case: duplicate, blurry and undated images must prompt review.
 
-## 10. Are there any known limitations?
+## 10. Known limitations
 
-Members need NAS accounts and shared access. Equal splits and two-decimal settlement currencies only; users supply rates. Search previews, OCR and location metadata can limit coverage. Excluding receipts from albums depends on supported operations. Missing expenses can change totals.
+Members need NAS accounts and shared access. Equal splits and two-decimal settlement currencies only; users supply rates. Search previews, OCR and location metadata limit coverage. Album receipt exclusion needs device testing.
 
 ---
 
-UGREEN's official kit 0.7.7/catalog 2.2.0 and runtime experts are used under applicable UGREEN terms: https://ai.ugreen.com/pages/hackathon-starter-kit. No third-party libraries are bundled in the Skill, and it uses no external runtime services.
+UGREEN kit 0.7.7/catalog 2.2.0 and experts: https://ai.ugreen.com/pages/hackathon-starter-kit (UGREEN terms). No bundled libraries or external runtime services.
 
-Codex helped write and review the Skill and proposal and prepare validation tools: https://openai.com/codex/, applicable OpenAI terms. Local document generation uses ReportLab 4.4.9 (BSD license, https://www.reportlab.com/), Bitstream Vera (font license, https://www.gnome.org/fonts/) and python-docx (MIT license, https://python-docx.readthedocs.io/). These are not Skill dependencies. Full tool, license and AI-use details are in the ZIP's linked references/disclosures.md.
+Codex assisted drafting, review and validation; OpenAI image generation created covers: https://openai.com/ (OpenAI terms). Document tools: ReportLab (BSD, https://www.reportlab.com/), python-docx (MIT, https://python-docx.readthedocs.io/), Bitstream Vera (font license, https://www.gnome.org/fonts/). Full disclosure: references/disclosures.md.

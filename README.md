@@ -14,7 +14,7 @@ The latest version is 0.2.1:
 - [Proposal PDF](proposal/releases/v0.2.1/trip-wrap-up-proposal-v0.2.1-review.pdf), [Word copy](proposal/releases/v0.2.1/trip-wrap-up-proposal.docx) and [editable text](proposal/proposal-v0.2.1-review.md)
 - [Review against the judging criteria, in Chinese](proposal/criteria-review.md)
 
-The ZIP contains `SKILL.md` and five Markdown references. The [AI and dependency disclosure](trip-wrap-up/references/disclosures.md) is included in the package. Original proposal files and earlier releases remain in `proposal/`.
+The ZIP contains `SKILL.md` and six Markdown references, including a [usage README](trip-wrap-up/references/README.md). The [AI and dependency disclosure](trip-wrap-up/references/disclosures.md) is included in the package. Original proposal files and earlier releases remain in `proposal/`.
 
 ## Current limits and checks
 

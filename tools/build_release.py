@@ -12,6 +12,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 TRACK = 'Automate Your Workflow'
+ENTRANT = 'Jiayi Guan'
 
 
 def write_json(path, data):
@@ -52,6 +53,7 @@ def render_pdf(path, source):
     story = [Paragraph('Trip Wrap-Up', styles['title']),
              Paragraph('UGREEN Hackathon 2026', styles['heading']),
              Paragraph(TRACK, styles['note']),
+             Paragraph(f'Submitted by: {ENTRANT}', styles['note']),
              Spacer(1, 6)]
     pairs = proposal_parts(source)
     for index, (question, answer) in enumerate(pairs):
@@ -72,7 +74,7 @@ def render_pdf(path, source):
         canvas.restoreState()
     SimpleDocTemplate(str(path), pagesize=A4, leftMargin=42, rightMargin=42,
                       topMargin=35, bottomMargin=42, title='Trip Wrap-Up',
-                      author='Trip Wrap-Up project').build(story, onFirstPage=footer, onLaterPages=footer)
+                      author=ENTRANT).build(story, onFirstPage=footer, onLaterPages=footer)
 
 
 def render_docx(path, source):
@@ -102,6 +104,7 @@ def render_docx(path, source):
     heading.paragraph_format.keep_with_next = True
     doc.add_paragraph('Trip Wrap-Up', style='Title')
     doc.add_paragraph(f'UGREEN Hackathon 2026 · {TRACK}')
+    doc.add_paragraph(f'Submitted by: {ENTRANT}')
     for index, (question, answer) in enumerate(proposal_parts(source)):
         p = doc.add_paragraph(question, style='Heading 2')
         if index == 5:
@@ -125,7 +128,7 @@ def render_docx(path, source):
     footer._p.append(page)
     doc.core_properties.title = 'Trip Wrap-Up'
     doc.core_properties.subject = 'UGREEN Hackathon 2026 proposal'
-    doc.core_properties.author = ''
+    doc.core_properties.author = ENTRANT
     doc.save(path)
 
 

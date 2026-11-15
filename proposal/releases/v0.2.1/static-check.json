@@ -17,6 +17,10 @@
       "sha256": "d6c5d95eda2605038afbb764778399953d933c4757b8c58cfbb12a1bf26328b5"
     },
     {
+      "path": "references/README.md",
+      "sha256": "5baad0f9ad30da43a49ef11421a86e1ffe62692531032fdb6861d55e20851a03"
+    },
+    {
       "path": "references/report-template.md",
       "sha256": "ae31f6e74d24f4e6491212e635050b1c69b3b6073ec97a1f779b14dc06a10139"
     },
@@ -30,7 +34,7 @@
     },
     {
       "path": "SKILL.md",
-      "sha256": "8c2992454bfe4eafebbf7a3890848760d6e0894fd43ff5313e7361d53bef83b8"
+      "sha256": "4644b6ccb6be2735b7a8078ed1f1e174ed8ff4dc40282f8ce99f7ae235778eb9"
     }
   ],
   "summary": {
