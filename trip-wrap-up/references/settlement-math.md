@@ -1,10 +1,12 @@
 # Settlement math
 
-The parent Skill does this arithmetic itself after the user confirms every shared receipt. Work in **integer cents** of the settlement currency so that rounding never makes money appear or disappear.
+The parent Skill does this arithmetic itself after the user confirms every shared receipt. Version 0.2.0 supports settlement currencies with two decimal places, using **integer cents**. No scripts or programming runtimes execute on the NAS. If reliable arithmetic cannot be established, stop before saving or issuing a settlement.
 
 ## 1. Convert to the settlement currency
 
-For each shared receipt in a foreign currency, multiply the amount by the rate the user confirmed (1 foreign unit = rate settlement units) and round to the nearest cent, with half a cent rounding up. Record the original amount, the rate, and the converted amount in the report. If a rate is missing, stop and ask the user. Never estimate a rate.
+For every shared receipt whose ISO currency differs from settlement, multiply the confirmed paid amount by its confirmed positive rate (1 foreign unit = rate settlement units), then round once to the nearest cent, with half a cent rounding up. This also applies when all receipts use the same foreign currency. Use exact decimal reasoning, not binary floating-point approximations. Record original amount, rate and converted amount per receipt; different transaction rates are allowed. Missing rates and ambiguous currency codes require a user answer. Never estimate. Example: USD 0.01 at 1.50 CAD/USD becomes CAD 0.02.
+
+Shared amounts must be nonnegative and payers must be listed members. Refunds and unresolved mixed personal/shared amounts are unsupported. Same-currency amounts must be whole cents. Sum converted receipts first; do not split and round each receipt separately.
 
 ## 2. Each member's share
 
@@ -24,7 +26,7 @@ For each member i:
 
 A positive net means the group owes this member money. A negative net means this member owes the group.
 
-**Zero-sum self-check:** the sum of net(i) over all members must equal exactly 0. If it does not, stop and report the mismatch. Do not save a report.
+**Acceptance checks:** independently recompute paid sums from the confirmed ledger. Total paid and total shares must both equal S, and the sum of original net(i) must be exactly 0. Zero-sum alone cannot detect omitted or misread receipts. If any check fails, stop, report the discrepancy and do not save.
 
 ## 4. Transfers (greedy matching)
 
@@ -33,6 +35,8 @@ A positive net means the group owes this member money. A negative net means this
 3. The debtor pays the creditor **min(amount owed, amount due)**. Record "debtor → creditor: amount".
 4. Subtract that amount from both balances. Anyone whose balance reaches 0 leaves the lists.
 5. Repeat until both lists are empty.
+
+Apply transfers to original balances: increase the debtor's residual net and decrease the creditor's by each transfer. All residuals must become zero. Require positive integer-cent transfers between distinct listed members. Preserve original balances in the report. Zero shared total means no transfers; a changed member order, receipt, payer or rate requires recomputation and confirmation.
 
 Every round settles at least one person, and the last round settles two. So there are **at most n − 1 transfers**. This rule does not always find the smallest possible number of transfers. Finding that minimum is NP-hard in general, so the report says "at most n − 1 transfers", never "the fewest possible".
 
