@@ -11,7 +11,7 @@ Before calculating, it checks expenses in two ways: by day, and by place across 
 The latest version is 0.2.1:
 
 - [Skill ZIP](proposal/releases/v0.2.1/trip-wrap-up-v0.2.1.zip)
-- [Proposal PDF](proposal/releases/v0.2.1/trip-wrap-up-proposal-v0.2.1-review.pdf) and [editable text](proposal/proposal-v0.2.1-review.md)
+- [Proposal PDF](proposal/releases/v0.2.1/trip-wrap-up-proposal-v0.2.1-review.pdf), [Word copy](proposal/releases/v0.2.1/trip-wrap-up-proposal.docx) and [editable text](proposal/proposal-v0.2.1-review.md)
 - [Review against the judging criteria, in Chinese](proposal/criteria-review.md)
 
 The ZIP contains `SKILL.md` and five Markdown references. The [AI and dependency disclosure](trip-wrap-up/references/disclosures.md) is included in the package. Original proposal files and earlier releases remain in `proposal/`.
@@ -26,7 +26,7 @@ The Skill has not yet run on a NAS. Image extraction, receipt discovery, locatio
 
 ## Local development
 
-The scripts in `tools/` run on the development machine and stay outside the Skill ZIP. They require Python, Node.js, ReportLab and the official UGREEN kit.
+The scripts in `tools/` run on the development machine and stay outside the Skill ZIP. They require Python, Node.js, ReportLab, python-docx and the official UGREEN kit.
 
 ```text
 python tools/verify_settlement.py

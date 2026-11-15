@@ -4,21 +4,23 @@
   "kit_version": "0.7.7",
   "catalog_version": "2.2.0",
   "file_count": 6,
-  "uncompressed_bytes": 39920,
-  "zip_bytes": 17969,
-  "zip_sha256": "3ebeaf6c8bd73c991b15c698a00f1a70d495764b50a3c9277da88c1851d3d991",
+  "uncompressed_bytes": 40021,
+  "zip_bytes": 18008,
+  "zip_sha256": "98c7cc5f532062db4541a7a809a28d1e26f63aad57797ae8c202d6666bfc907a",
   "zip_sources_identical": true,
-  "proposal_answer_words_whitespace": 393,
-  "proposal_pdf_bytes": 45124,
-  "proposal_pdf_sha256": "8c541af5d8853006504f794da19a970df126165c7d25ba4b60d5e7d3bc1f7053",
+  "proposal_answer_words_whitespace": 433,
+  "proposal_pdf_bytes": 45481,
+  "proposal_pdf_sha256": "1cadde3b18d934a25393a3cf38faf9f9f0383fe73df45d1b3e80db8e615fb0ee",
   "nas_runtime_validated": false,
   "proposal_status": "proposal revision; original and earlier releases preserved",
   "source_files": {
     "SKILL.md": "8c2992454bfe4eafebbf7a3890848760d6e0894fd43ff5313e7361d53bef83b8",
     "references/capability-boundaries.md": "44c60e2091cc6569f328e9addd2306168ae49a94ddf8897bca7e144a379d8032",
-    "references/disclosures.md": "08348352492f3d6c41cb8e7318a24f6b28724d9b2d070ed8a715a273309c26ee",
+    "references/disclosures.md": "400cee4f86f8d17db1ee03c48472c813aad1080205dbf654043d06291ee5cebf",
     "references/report-template.md": "ae31f6e74d24f4e6491212e635050b1c69b3b6073ec97a1f779b14dc06a10139",
     "references/settlement-math.md": "0c3a7049cb950f8657145e7c02db7b8cd14726bc736a75ac256a2554d65cdc7b",
     "references/validation-plan.md": "4f3eb3bfe48e86c030ba38116c1314e0c58253e66697e3d2b6584cc605bb5177"
-  }
+  },
+  "proposal_docx_bytes": 39485,
+  "proposal_docx_sha256": "638cebd6c971794e1e6306406b1943a5e062138d63cad60778021fd57b99077f"
 }

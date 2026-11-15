@@ -74,6 +74,60 @@ def render_pdf(path, source):
                       author='Trip Wrap-Up project').build(story, onFirstPage=footer, onLaterPages=footer)
 
 
+def render_docx(path, source):
+    from docx import Document
+    from docx.enum.text import WD_ALIGN_PARAGRAPH
+    from docx.oxml import OxmlElement
+    from docx.oxml.ns import qn
+    from docx.shared import Inches, Pt, RGBColor
+
+    doc = Document()
+    section = doc.sections[0]
+    section.page_width, section.page_height = Inches(8.27), Inches(11.69)
+    section.top_margin = section.bottom_margin = Inches(0.55)
+    section.left_margin = section.right_margin = Inches(0.65)
+    normal = doc.styles['Normal']
+    normal.font.name, normal.font.size = 'Calibri', Pt(11)
+    normal.paragraph_format.space_after = Pt(7)
+    normal.paragraph_format.line_spacing = 1.1
+    for name in ['Title', 'Heading 2']:
+        style = doc.styles[name]
+        style.font.name = 'Calibri'
+        style.font.color.rgb = RGBColor.from_string('000000')
+    heading = doc.styles['Heading 2']
+    heading.font.size, heading.font.bold = Pt(11), True
+    heading.paragraph_format.space_before = Pt(10)
+    heading.paragraph_format.space_after = Pt(4)
+    heading.paragraph_format.keep_with_next = True
+    doc.add_paragraph('Trip Wrap-Up', style='Title')
+    doc.add_paragraph('UGREEN Hackathon 2026 · Open Innovation')
+    for index, (question, answer) in enumerate(proposal_parts(source)):
+        p = doc.add_paragraph(question, style='Heading 2')
+        if index == 5:
+            p.paragraph_format.page_break_before = True
+        for line in answer.splitlines():
+            numbered = re.match(r'^\d+\.\s+(.+)$', line)
+            if numbered:
+                doc.add_paragraph(numbered.group(1), style='List Number')
+            elif line.strip():
+                doc.add_paragraph(line)
+    doc.add_paragraph('Tools and AI assistance', style='Heading 2')
+    for paragraph in source.split('\n---\n', 1)[1].strip().split('\n\n'):
+        p = doc.add_paragraph(paragraph)
+        for run in p.runs:
+            run.font.size = Pt(9)
+    footer = section.footer.paragraphs[0]
+    footer.alignment = WD_ALIGN_PARAGRAPH.RIGHT
+    footer.add_run('Trip Wrap-Up · ').font.size = Pt(9)
+    page = OxmlElement('w:fldSimple')
+    page.set(qn('w:instr'), 'PAGE')
+    footer._p.append(page)
+    doc.core_properties.title = 'Trip Wrap-Up'
+    doc.core_properties.subject = 'UGREEN Hackathon 2026 proposal'
+    doc.core_properties.author = ''
+    doc.save(path)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--kit', type=Path, required=True,
@@ -128,6 +182,8 @@ def main():
     pdf = release / f'trip-wrap-up-proposal-v{version}-review.pdf'
     render_pdf(pdf, source)
     assert pdf.stat().st_size <= 1024 * 1024
+    docx = release / 'trip-wrap-up-proposal.docx'
+    render_docx(docx, source)
     write_json(release / 'static-check.json', check_data)
     write_json(release / 'math-check.json', math_data)
     evidence = {
@@ -140,6 +196,8 @@ def main():
         'proposal_answer_words_whitespace': words,
         'proposal_pdf_bytes': pdf.stat().st_size,
         'proposal_pdf_sha256': hashlib.sha256(pdf.read_bytes()).hexdigest(),
+        'proposal_docx_bytes': docx.stat().st_size,
+        'proposal_docx_sha256': hashlib.sha256(docx.read_bytes()).hexdigest(),
         'nas_runtime_validated': False,
         'proposal_status': 'proposal revision; original and earlier releases preserved',
         'source_files': {p.relative_to(package).as_posix(): hashlib.sha256(p.read_bytes()).hexdigest()

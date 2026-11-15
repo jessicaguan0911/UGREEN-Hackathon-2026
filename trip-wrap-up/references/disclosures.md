@@ -20,6 +20,7 @@ Local development utilities, which are not Skill runtime dependencies:
 | Python | https://www.python.org/ | PSF License |
 | Node.js | https://nodejs.org/ | MIT license |
 | ReportLab 4.4.9 | https://www.reportlab.com/ | BSD license, as stated in its package metadata |
+| python-docx 1.2.0, for the editable proposal | https://python-docx.readthedocs.io/ | MIT license |
 | Bitstream Vera font, embedded in the separate proposal PDF | https://www.gnome.org/fonts/ | Bitstream Vera font license |
 
 ## AI assistance
