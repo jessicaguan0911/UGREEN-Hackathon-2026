@@ -1,6 +1,6 @@
 # Trip Wrap-Up
 
-UGREEN Hackathon 2026 · Open Innovation · Version 0.2.1
+UGREEN Hackathon 2026 · Open Innovation
 
 ## 1. What does the Skill do?
 

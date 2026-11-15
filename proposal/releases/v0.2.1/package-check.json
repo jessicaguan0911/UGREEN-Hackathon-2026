@@ -9,8 +9,8 @@
   "zip_sha256": "3ebeaf6c8bd73c991b15c698a00f1a70d495764b50a3c9277da88c1851d3d991",
   "zip_sources_identical": true,
   "proposal_answer_words_whitespace": 393,
-  "proposal_pdf_bytes": 45144,
-  "proposal_pdf_sha256": "a3ef6d2058c048580f24fecd8c9ceaaab1997e7800e143da696347f72d1668d6",
+  "proposal_pdf_bytes": 45124,
+  "proposal_pdf_sha256": "8c541af5d8853006504f794da19a970df126165c7d25ba4b60d5e7d3bc1f7053",
   "nas_runtime_validated": false,
   "proposal_status": "proposal revision; original and earlier releases preserved",
   "source_files": {

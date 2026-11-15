@@ -26,7 +26,7 @@ def proposal_parts(source):
     return pairs
 
 
-def render_pdf(path, source, version):
+def render_pdf(path, source):
     import reportlab
     from reportlab.lib import colors
     from reportlab.lib.enums import TA_LEFT
@@ -50,7 +50,7 @@ def render_pdf(path, source, version):
     }
     story = [Paragraph('Trip Wrap-Up', styles['title']),
              Paragraph('UGREEN Hackathon 2026', styles['heading']),
-             Paragraph(f'Open Innovation | Version {version}', styles['note']),
+             Paragraph('Open Innovation', styles['note']),
              Spacer(1, 6)]
     pairs = proposal_parts(source)
     for index, (question, answer) in enumerate(pairs):
@@ -70,7 +70,7 @@ def render_pdf(path, source, version):
         canvas.drawRightString(A4[0] - 42, 25, str(doc.page))
         canvas.restoreState()
     SimpleDocTemplate(str(path), pagesize=A4, leftMargin=42, rightMargin=42,
-                      topMargin=35, bottomMargin=42, title=f'Trip Wrap-Up v{version}',
+                      topMargin=35, bottomMargin=42, title='Trip Wrap-Up',
                       author='Trip Wrap-Up project').build(story, onFirstPage=footer, onLaterPages=footer)
 
 
@@ -126,7 +126,7 @@ def main():
             assert z.read('trip-wrap-up/' + p.relative_to(package).as_posix()) == p.read_bytes()
     assert archive.stat().st_size <= 10 * 1024 * 1024
     pdf = release / f'trip-wrap-up-proposal-v{version}-review.pdf'
-    render_pdf(pdf, source, version)
+    render_pdf(pdf, source)
     assert pdf.stat().st_size <= 1024 * 1024
     write_json(release / 'static-check.json', check_data)
     write_json(release / 'math-check.json', math_data)
