@@ -69,3 +69,14 @@ These are the answers to the 30 critical PM questions. Each decision will be app
 - **Answer:** people forget, and nobody wants to keep score while on vacation.
 - **Positioning:** "During the trip, you do one thing: snap the receipt." Entering an amount, picking a payer and choosing a split in an app is much more effort, and it interrupts the trip.
 - **Pitch line:** "No one wants to keep score on vacation. Just snap the receipt; settle up at home."
+
+## Q23 (revised after the official FAQ)
+- **Decision:** use synthetic or anonymized test data.
+  - Scenery photos may be the entrant's own.
+  - Receipts must be home-made fakes, or real receipts with card digits and names masked.
+  - People in photos: only the entrant, or friends who agreed to appear.
+
+## Submission plan (after the official FAQ)
+- Submit the current version first as a backup.
+- The entrant then rewrites the 10 PDF answers and the Devpost text in their own words. AI help is limited to spelling, grammar and word count.
+- The AI-tool disclosure must list every use honestly, including idea brainstorming.
