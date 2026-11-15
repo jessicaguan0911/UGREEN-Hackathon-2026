@@ -26,7 +26,7 @@ def proposal_parts(source):
     return pairs
 
 
-def render_pdf(path, source):
+def render_pdf(path, source, version):
     import reportlab
     from reportlab.lib import colors
     from reportlab.lib.enums import TA_LEFT
@@ -49,27 +49,28 @@ def render_pdf(path, source):
                               leading=10.5, textColor=colors.HexColor('#455A64')),
     }
     story = [Paragraph('Trip Wrap-Up', styles['title']),
-             Paragraph('Settle Up and Relive Your Trip', styles['heading']),
-             Paragraph('Open Innovation | v0.2.0 | Technical revision for entrant review', styles['note']),
+             Paragraph('UGREEN Hackathon 2026', styles['heading']),
+             Paragraph(f'Open Innovation | Version {version}', styles['note']),
              Spacer(1, 6)]
     pairs = proposal_parts(source)
     for index, (question, answer) in enumerate(pairs):
         if index == 5:
-            story.extend([PageBreak(), Paragraph('Trip Wrap-Up: technical approach and validation', styles['heading'])])
+            story.extend([PageBreak(), Paragraph('Trip Wrap-Up', styles['heading'])])
         story.extend([Paragraph(escape(question), styles['heading']),
                       Paragraph(escape(answer).replace('\n', '<br/>'), styles['body'])])
     disclosure = source.split('\n---\n', 1)[1].strip()
-    story.extend([Spacer(1, 16), Paragraph('Dependencies and AI disclosure', styles['heading']),
-                  Paragraph(escape(disclosure), styles['note'])])
+    story.extend([Spacer(1, 16), Paragraph('Tools and AI assistance', styles['heading'])])
+    for paragraph in disclosure.split('\n\n'):
+        story.extend([Paragraph(escape(paragraph), styles['note']), Spacer(1, 5)])
     def footer(canvas, doc):
         canvas.saveState()
         canvas.setFont('Vera', 8)
         canvas.setFillColor(colors.HexColor('#455A64'))
-        canvas.drawString(42, 25, 'Round 1 technical review draft | NAS runtime not yet validated')
+        canvas.drawString(42, 25, 'UGREEN Hackathon 2026 | Trip Wrap-Up')
         canvas.drawRightString(A4[0] - 42, 25, str(doc.page))
         canvas.restoreState()
     SimpleDocTemplate(str(path), pagesize=A4, leftMargin=42, rightMargin=42,
-                      topMargin=35, bottomMargin=42, title='Trip Wrap-Up v0.2.0 - entrant review',
+                      topMargin=35, bottomMargin=42, title=f'Trip Wrap-Up v{version}',
                       author='Trip Wrap-Up project').build(story, onFirstPage=footer, onLaterPages=footer)
 
 
@@ -77,12 +78,16 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--kit', type=Path, required=True,
                         help='official extracted uliya-skill-kit directory; not redistributed')
+    parser.add_argument('--version', default='0.2.1', help='new release version, such as 0.2.1')
     args = parser.parse_args()
+    if not re.fullmatch(r'\d+\.\d+\.\d+', args.version):
+        raise SystemExit('Version must have the form major.minor.patch.')
+    version = args.version
     package = ROOT / 'trip-wrap-up'
-    release = ROOT / 'proposal/releases/v0.2.0'
+    release = ROOT / f'proposal/releases/v{version}'
     if release.exists():
-        raise SystemExit('Release v0.2.0 already exists; do not overwrite a published/versioned release.')
-    source_path = ROOT / 'proposal/proposal-v0.2.0-review.md'
+        raise SystemExit(f'Release v{version} already exists; existing releases are preserved.')
+    source_path = ROOT / f'proposal/proposal-v{version}-review.md'
     source = source_path.read_text()
     words = sum(len(answer.split()) for _, answer in proposal_parts(source))
     if words > 500:
@@ -106,7 +111,7 @@ def main():
         if p.name != 'SKILL.md':
             assert f']({p.relative_to(package).as_posix()})' in skill, p
     release.mkdir(parents=True)
-    archive = release / 'trip-wrap-up-v0.2.0.zip'
+    archive = release / f'trip-wrap-up-v{version}.zip'
     with zipfile.ZipFile(archive, 'w', compression=zipfile.ZIP_DEFLATED) as z:
         for p in files:
             # Stable archive metadata makes repeated builds from identical sources reproducible.
@@ -120,13 +125,13 @@ def main():
         for p in files:
             assert z.read('trip-wrap-up/' + p.relative_to(package).as_posix()) == p.read_bytes()
     assert archive.stat().st_size <= 10 * 1024 * 1024
-    pdf = release / 'trip-wrap-up-proposal-v0.2.0-review.pdf'
-    render_pdf(pdf, source)
+    pdf = release / f'trip-wrap-up-proposal-v{version}-review.pdf'
+    render_pdf(pdf, source, version)
     assert pdf.stat().st_size <= 1024 * 1024
     write_json(release / 'static-check.json', check_data)
     write_json(release / 'math-check.json', math_data)
     evidence = {
-        'status': 'pass', 'version': '0.2.0', 'kit_version': '0.7.7',
+        'status': 'pass', 'version': version, 'kit_version': '0.7.7',
         'catalog_version': '2.2.0', 'file_count': len(files),
         'uncompressed_bytes': sum(p.stat().st_size for p in files),
         'zip_bytes': archive.stat().st_size,
@@ -136,7 +141,7 @@ def main():
         'proposal_pdf_bytes': pdf.stat().st_size,
         'proposal_pdf_sha256': hashlib.sha256(pdf.read_bytes()).hexdigest(),
         'nas_runtime_validated': False,
-        'proposal_status': 'technical revision for entrant review; originals preserved',
+        'proposal_status': 'proposal revision; original and earlier releases preserved',
         'source_files': {p.relative_to(package).as_posix(): hashlib.sha256(p.read_bytes()).hexdigest()
                          for p in files},
     }

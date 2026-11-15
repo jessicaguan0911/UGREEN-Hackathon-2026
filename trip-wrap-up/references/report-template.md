@@ -4,7 +4,7 @@ Use confirmed financial fields only. Unknown optional date/place/merchant may sa
 
 ```text
 # Trip Wrap-Up: [confirmed trip label]
-Skill 0.2.0 · Report revision: [revision]
+Skill 0.2.1 · Report revision: [revision]
 [first day] to [last day] · Trip timezone: [timezone]
 Members in rounding order: [labels] · Settlement currency: [ISO code]
 Scope: [confirmed spaces and enforced album/folder restrictions]
@@ -25,10 +25,15 @@ All residual balances after transfers = 0.00
 Transfer count: [count], at most [n-1]; no self/zero/negative transfers
 Rounding: [r] minor unit(s) assigned to [labels] in confirmed member order
 
-## Photo-activity checklist
-| Day | Place or day-only | Matched photos | Confirmed receipts | User's gap decision |
-Unknown counts stay unknown; overlapping place counts are not additive.
-A free activity may have zero receipts; record the user's answer.
+## Expenses by day
+| Day | Matched photos | Unique receipt candidates | Unreadable/pending | Confirmed shared receipts | Spending decision |
+Include every trip day, including days with no photos. Keep unknown receipt dates in a separate row.
+
+## Expenses by place
+| Place across the whole trip | Dates visited if known | Matched photos | Unique receipt candidates | Unreadable/pending | Confirmed shared receipts | Spending decision |
+Use one row per known place even when visited on several days. Unknown places stay separate.
+
+For both views, unknown counts stay unknown. Count a duplicated transaction once after review. Never sum overlapping place searches as unique photos. Explain whether zero confirmed receipts means none found, unreadable candidates, or pending confirmation. Keep any search coverage limitation beside the count. A free activity may have no receipts; record the user's answer. A group with receipts may still have missing expenses.
 
 ## Confirmed shared receipts
 | ID | Date | Place | Merchant | Original amount and ISO currency | Rate ID | Converted amount | Payer | Full source path and picture ID, or manual entry |
@@ -51,10 +56,10 @@ Manual corrections/added expenses: [IDs and changes]
 Date-uncertain photos: [IDs and user's decisions]
 Known omissions: [specific list, or none among reviewed candidates]
 
-## Output boundaries
-This report proposes transfers; it does not move money or send messages.
-Reader access to the confirmed destination must be verified separately.
-No claim is made that every trip purchase was found.
+## Notes
+These are amounts to settle; the Skill does not make payments or send messages.
+Confirm that members can open the saved report.
+The totals cover the confirmed expenses listed here.
 ```
 
 Omit the supersedes line, personal/exclusion table or exchange-rate table only when inapplicable. Keep coverage and arithmetic checks even with no shared expenses. The verified saved path belongs in the final conversation; do not guess it before saving.

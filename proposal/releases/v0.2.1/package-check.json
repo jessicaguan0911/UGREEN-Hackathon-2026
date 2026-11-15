@@ -1,0 +1,24 @@
+{
+  "status": "pass",
+  "version": "0.2.1",
+  "kit_version": "0.7.7",
+  "catalog_version": "2.2.0",
+  "file_count": 6,
+  "uncompressed_bytes": 39920,
+  "zip_bytes": 17969,
+  "zip_sha256": "3ebeaf6c8bd73c991b15c698a00f1a70d495764b50a3c9277da88c1851d3d991",
+  "zip_sources_identical": true,
+  "proposal_answer_words_whitespace": 393,
+  "proposal_pdf_bytes": 45144,
+  "proposal_pdf_sha256": "a3ef6d2058c048580f24fecd8c9ceaaab1997e7800e143da696347f72d1668d6",
+  "nas_runtime_validated": false,
+  "proposal_status": "proposal revision; original and earlier releases preserved",
+  "source_files": {
+    "SKILL.md": "8c2992454bfe4eafebbf7a3890848760d6e0894fd43ff5313e7361d53bef83b8",
+    "references/capability-boundaries.md": "44c60e2091cc6569f328e9addd2306168ae49a94ddf8897bca7e144a379d8032",
+    "references/disclosures.md": "08348352492f3d6c41cb8e7318a24f6b28724d9b2d070ed8a715a273309c26ee",
+    "references/report-template.md": "ae31f6e74d24f4e6491212e635050b1c69b3b6073ec97a1f779b14dc06a10139",
+    "references/settlement-math.md": "0c3a7049cb950f8657145e7c02db7b8cd14726bc736a75ac256a2554d65cdc7b",
+    "references/validation-plan.md": "4f3eb3bfe48e86c030ba38116c1314e0c58253e66697e3d2b6584cc605bb5177"
+  }
+}

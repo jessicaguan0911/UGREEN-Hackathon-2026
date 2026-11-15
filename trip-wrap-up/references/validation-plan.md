@@ -33,6 +33,10 @@ Repeat with no capture-time matches and a confirmed upload window. The fallback 
 
 | Scenario | Expected behavior |
 |---|---|
+| Third trip day has no confirmed receipts | Show it in the daily view and ask about shared spending, even if no photos were found; do not invent an expense. |
+| Same place visited on two days | One whole-trip place-summary row; use the actual scoped query total, not an overlapping sum. |
+| One receipt found at a place, another missed by search | Allow an added expense even though the confirmed count is nonzero; do not mark the place complete automatically. |
+| A found receipt is unreadable or not confirmed | Show it separately from no candidates found; it is not a zero-value expense. |
 | 21 receipt matches, 20 preview paths | Flag coverage gap; confirm smaller batches or user files; never claim 21 extractions from 20 inputs. |
 | All receipts USD, settlement CAD | Ask for rates despite one receipt currency. |
 | USD 0.01 at 1.50 CAD/USD | CAD 0.02, decimal half-up. |

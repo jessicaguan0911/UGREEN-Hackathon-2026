@@ -1,31 +1,35 @@
-# Components, originality and AI-use disclosure
+# Development and AI disclosure
 
-## Principal functionality developed for this Hackathon
+## Work developed for this Hackathon
 
-This project defines a new Markdown orchestration workflow for post-trip expense review: discover receipt candidates in authorized NAS photo spaces; use day/place photo activity to prompt missing-expense review; confirm duplicates, payers, personal exclusions and rates; calculate equal-share transfers with integer-cent checks; save a source-traceable report; and optionally create albums from the same trip scope. Supporting documents define report format, settlement rules, capability boundaries and validation scenarios. No custom application, trained model or executable NAS code is bundled.
+Trip Wrap-Up's Skill and supporting documents were developed during this Hackathon. The workflow finds receipt photos, checks for possible missing expenses by day and by place, asks users to confirm financial details, calculates equal shares, and saves a report. Optional albums use the same trip information.
 
-Repository history records the initial Skill during this Hackathon. The entrant retains responsibility for originality and rights to submitted work/data; no pre-existing third-party Skill is claimed. Development scope is not proof of NAS runtime execution.
+The package contains the Markdown workflow, report template, settlement rules, capability notes and test plan. It does not reuse a previously developed third-party Skill. There are no bundled scripts, libraries, model weights or executables.
 
-## Third-party resources and dependencies
+## Tools and dependencies
 
-| Resource | Source | Terms/license and use |
+The official UGREEN Skill Developer Package 0.7.7 and catalog 2.2.0 were used for authoring guidance, capability checks and static validation. They are available at https://ai.ugreen.com/pages/hackathon-starter-kit and are subject to UGREEN's applicable agreements and publishing guidelines. No open-source license is claimed for these resources, and the kit is not included in the Skill ZIP.
+
+At runtime, the Skill needs UGREEN's registered photo-agent, document-agent and knowledge-agent, plus a configured NAS-local model, under the platform's applicable terms. Actual device behavior has not yet been tested. The workflow uses no external model, exchange-rate API or payment service.
+
+Local development utilities, which are not Skill runtime dependencies:
+
+| Tool | Source | License or terms |
 |---|---|---|
-| Official UGREEN Skill Developer Package 0.7.7, catalog 2.2.0 | https://ai.ugreen.com/pages/hackathon-starter-kit | UGREEN-provided resource subject to its applicable agreement, privacy policy and Skill publishing guidelines; no open-source license is asserted. Used for guidance, capability lookup and local static checks. Tool/checker/catalog not redistributed in the Skill ZIP. |
-| UGOS photo-agent, document-agent, knowledge-agent and configured NAS-local model | Official Starter Kit and assigned UGREEN AI NAS | Platform runtime dependencies under applicable UGREEN service/license terms. No SDK or model weights bundled; device behavior not yet tested. |
-| OpenAI Codex | https://openai.com/codex/ | AI development assistance under applicable OpenAI terms; not a Skill runtime dependency. Principal uses below. |
-| ReportLab 4.4.9 (local PDF review draft only) | https://www.reportlab.com/ | BSD license per installed package metadata. Its bundled Bitstream Vera font is embedded in the separate PDF under the Bitstream Vera font license (source: https://www.gnome.org/fonts/). Neither library nor font is in the Skill ZIP or a NAS dependency. |
-| Python and Node.js (local validation/build only) | https://www.python.org/ and https://nodejs.org/ | PSF License and MIT license respectively; not redistributed in the Skill ZIP. Node.js runs the official checker; Python runs synthetic arithmetic checks and packaging. |
+| OpenAI Codex | https://openai.com/codex/ | Applicable OpenAI terms |
+| Python | https://www.python.org/ | PSF License |
+| Node.js | https://nodejs.org/ | MIT license |
+| ReportLab 4.4.9 | https://www.reportlab.com/ | BSD license, as stated in its package metadata |
+| Bitstream Vera font, embedded in the separate proposal PDF | https://www.gnome.org/fonts/ | Bitstream Vera font license |
 
-**Bundled third-party components and open-source libraries: none.** The ZIP contains only project Markdown. Local packaging and mathematical verification utilities stay outside the ZIP and are not runtime dependencies. No additional external APIs, live-rate service or external data feed is used.
+## AI assistance
 
-## AI tools and principal uses
+Codex helped review the idea, write and revise the Skill and proposal, identify edge cases, and prepare the local validation and packaging tools. It also checked word counts and package contents and ran the official checker. The entrant confirmed that Codex and the official UGREEN package were the only AI/Skill-assistance products used. The UGREEN package supplied instructions and capability information; it is not a separate AI model.
 
-The entrant confirmed that **Codex and the official UGREEN package are the only AI/Skill-assistance products used**. Codex assisted PM/idea review, drafting and revising the Skill workflow and supporting documentation, identifying limitations and edge cases, checking proposal word count and package consistency, invoking the official checker, and developing local arithmetic verification and packaging utilities. Codex also drafted the version 0.2.0 technical proposal revision; the original proposal files are preserved. The entrant must review final submission authorship and any separate FAQ requirements. This assistance must not be described as proofreading only.
+Codex is a development tool, not a runtime service for the Skill. It has not run this project on a NAS or submitted the entry.
 
-The UGREEN package supplied authoring instructions, capability facts and static validation; it is a development resource, not another AI model. Codex did not access a test NAS, execute the Skill on a NAS, move money, message trip members or submit the entry. No runtime Codex/OpenAI connection is required by the workflow.
+## Data handling
 
-## Data and external flows
+Development used project files, contest text and public technical documentation. The package contains no real receipts, private photo libraries, credentials or API keys. Test descriptions use invented names and synthetic amounts. Demo data must be synthetic or anonymized, and any images must be authorized for use.
 
-Codex reviewed project files, supplied contest text and public technical documentation in the development workspace. No real trip receipts, credentials or personal photo libraries are bundled. Fixtures use invented labels and synthetic descriptions; no real card digits, personal data, access tokens or API keys are included.
-
-The intended deployed workflow uses local NAS capabilities and a user-confirmed destination, with no added external inference or transmission. This is a design constraint: local-model routing, storage permissions, indexing and actual device behavior remain to be validated. Public demo data must be synthetic/anonymized and images authorized.
+The intended workflow processes authorized NAS content with local capabilities and saves only to a user-confirmed folder. It does not send receipts to an external service. Local-model routing, permissions and indexing still need to be checked on the assigned NAS.

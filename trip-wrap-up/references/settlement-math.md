@@ -1,6 +1,6 @@
 # Settlement math
 
-The parent Skill does this arithmetic itself after the user confirms every shared receipt. Version 0.2.0 supports settlement currencies with two decimal places, using **integer cents**. No scripts or programming runtimes execute on the NAS. If reliable arithmetic cannot be established, stop before saving or issuing a settlement.
+The parent Skill does this arithmetic itself after the user confirms every shared receipt. Version 0.2.1 supports settlement currencies with two decimal places, using integer cents. No scripts or programming runtimes execute on the NAS. If reliable arithmetic cannot be established, stop before saving or issuing a settlement.
 
 ## 1. Convert to the settlement currency
 

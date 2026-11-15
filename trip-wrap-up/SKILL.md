@@ -7,7 +7,7 @@ description: Settle shared trip expenses for roommates and friend groups using r
 
 Let a neutral report do the asking after a trip: members photograph receipts during the trip, then review the expenses together at home. Produce a who-pays-whom report with an auditable ledger and a photo-activity checklist. Albums reuse that checklist and are optional; an album failure does not invalidate a verified report.
 
-Version: **0.2.0**, a Round 1 orchestration package. Device behavior is not yet validated. See [capability boundaries](references/capability-boundaries.md), [validation plan](references/validation-plan.md), and [components, originality and AI disclosure](references/disclosures.md).
+Version: 0.2.1. This is a Round 1 orchestration package; device behavior has not yet been tested. See [capability notes](references/capability-boundaries.md), [test plan](references/validation-plan.md), and [development and AI disclosure](references/disclosures.md).
 
 - Two to eight members, each with an account on the same NAS. Only the invoking account's authorized content is accessible; membership does not grant access to other members' private libraries or the report folder.
 - Equal shares among all members; whole personal receipts are excluded. Ask the user to separate mixed personal/shared items into confirmed entries without double counting. Unequal/subgroup splits and refunds are unsupported.
@@ -19,10 +19,10 @@ Version: **0.2.0**, a Round 1 orchestration package. Device behavior is not yet 
 
 Collect missing essentials in one short message; retain information already supplied:
 
-1. Trip label and full start/end dates, **YYYY-MM-DD**, plus trip timezone for day boundaries. Reject an end before the start. If no label is supplied, propose one from confirmed information.
+1. Trip label and full start/end dates, YYYY-MM-DD, plus trip timezone for day boundaries. Reject an end before the start. If no label is supplied, propose one from confirmed information.
 2. Two to eight unique member labels, in a fixed order for rounding, and the settlement currency. Ask if a currency symbol is ambiguous. Explain the two-decimal settlement limit.
 3. Payment mode: one named member paid all shared costs, or claim mode with the payer confirmed per receipt.
-4. Search scope: propose **shared photo space only**. Include the current user's personal space only with explicit consent. For a user-restricted album/folder, pass its real identifier to the expert; stop a search that cannot enforce that restriction.
+4. Search scope: propose shared photo space only. Include the current user's personal space only with explicit consent. For a user-restricted album/folder, pass its real identifier to the expert; stop a search that cannot enforce that restriction.
 5. Optional missing-date search: propose the explicit upload window from the trip's first day to seven days after its last day. Run it only if the user confirms those dates. Otherwise report missing-date coverage as unchecked.
 
 Ask later for corrections, personal items, payers, exchange rates, report destination and album choices. Allow the user to skip albums. Explain that photo activity is a memory prompt, not proof of a purchase or of complete expense coverage.
@@ -42,10 +42,12 @@ Run sequentially. Before sending a delegation below, replace its scope descripti
 ## 1. Build the photo-activity checklist (read only)
 
 ```text
-delegate --target photo-agent --instruction 'Within the exact dates, timezone and authorized photo scope supplied with this task, return trip-photo matched counts per day using supported searches. Return actual place candidates within this scope if available, then counts for confirmed day/place queries. Identify ambiguous places for user selection. Return query scope, matched total and real result reference for each search; label samples as samples. Do not derive counts or a complete place inventory from a preview, access other private libraries, create albums or modify photos. Report unsupported restrictions, unknown counts, missing locations and explicit no matches separately.'
+delegate --target photo-agent --instruction 'Within the exact dates, timezone and authorized photo scope supplied with this task, return trip-photo matched counts for every day in the confirmed date range. Find actual place candidates within this scope where supported and ask the user to resolve ambiguous matches. Also query each confirmed place over the full trip date range for its matched total. Keep the daily and full-trip place queries separate, with real scope, total and result reference for each. Label previews as samples. Do not derive counts or a complete place inventory from a preview, access other private libraries, create albums or modify photos. Report unsupported restrictions, unknown counts, missing locations and explicit no matches separately.'
 ```
 
-Keep query totals and references, not preview counts. If places cannot be determined, ask for optional itinerary place names to query, or use days only. A place list is not exhaustive unless established by the expert. Overlapping place counts are not additive; retain day totals as baseline. Unavailable counts are **unknown**, never zero.
+Keep query totals and references, not preview counts. If places cannot be determined, ask for optional itinerary place names to query, or use days only. A place list is not exhaustive unless established by the expert. Overlapping place counts are not additive; retain day totals as baseline. Unavailable counts are unknown, never zero.
+
+Keep two views of the same trip: one row for every trip day, and one row for each known place across all trip days. A place visited twice still has one place-summary row. Only real full-trip place queries establish its photo total; never sum overlapping results. Preserve the day/place association of individual receipts for review, with unknown dates or places kept separate.
 
 No capture-time matches do not end the approved upload fallback in Step 2. Report the unavailable activity checklist. If both searches explicitly find no photos, stop automation and offer user-supplied receipt paths/attachments for Step 3; never invent records or widen scope.
 
@@ -58,7 +60,7 @@ delegate --target photo-agent --instruction 'Find receipt candidates within the 
 - Follow [the coverage gate](references/capability-boundaries.md#search-coverage-gate). Confirm narrower day/time batches or ask for missing source files. A result reference alone cannot supply all receipt paths to document-agent.
 - Upload time does not prove trip date. Forwarding may remove or replace metadata. Ask which upload-window candidates belong to the trip; never silently discard them by guessed capture metadata.
 - Show numbered candidates with full path, time and date uncertainty. Ask to exclude unrelated images and confirm uncertain dates. Use only kept files. Merging the same picture ID is distinct from reviewing two photos of the same receipt.
-- No receipt matches: offer user-provided files/manual entries, or albums only. To continue without exhaustive candidate access, require explicit **limited coverage** acceptance, preserve known omissions and label the report accordingly. Never call it a complete trip total.
+- No receipt matches: offer user-provided files/manual entries, or albums only. To continue without exhaustive candidate access, require explicit limited coverage acceptance, preserve known omissions and label the report accordingly. Never call it a complete trip total.
 
 ## 3. Extract receipts (read only)
 
@@ -78,14 +80,14 @@ A search-discovered path alone does not satisfy the documented user-supplied-pat
 
 ## 4. Confirm the ledger and gaps (conversation only)
 
-Assign stable receipt labels R01, R02, etc.; retain full paths and picture IDs. Group by known day/place, leaving optional missing metadata **unknown**. Show amount, ISO currency, payer, shared/personal status, uncertainty, duplicates and source. Card digits are temporary hints; omit them from saved output.
+Assign stable receipt labels R01, R02, etc.; retain full paths and picture IDs. Show two separate summaries before the receipt details: by day, including every trip day, and by place over the whole trip. In each show matched photo counts, unique receipt candidates, unreadable or pending candidates, confirmed shared receipts and the user's spending decision. Do not double-count one transaction photographed twice. Keep unknown dates/places separate instead of assigning them by guess. Show amount, ISO currency, payer, shared/personal status, uncertainty, duplicates and source in the receipt details. Card digits are temporary hints; omit them from saved output.
 
 Ask only unresolved questions, in a batch:
 
-1. For photo-active days/places with no confirmed receipts, ask whether there was spending. Record **no spending confirmed**, **manual expense added**, or **unresolved**. A free hike can have zero receipts.
+1. Review both summaries for missing expenses. If day three has no confirmed shared receipts, ask whether anyone paid for anything that day; do the same for a known place with no confirmed receipts anywhere in the trip. Distinguish no candidate found, candidate unreadable, and candidate not yet confirmed. Show incomplete search coverage alongside a zero confirmed count. A day with no photos remains visible as a day with no photo evidence. Also let users add missing expenses to groups that already contain receipts; a nonzero receipt count does not prove completeness. Record no shared spending confirmed, manual expense added, or unresolved. A free hike can have zero receipts.
 2. Resolve suspected duplicates; retain the kept receipt and excluded source. Confirm tip-inclusive paid totals and ambiguous symbols such as `$`.
 3. Confirm personal exclusions or separate mixed receipts into entries without double counting. Confirm every shared payer, including the one-payer assumption. Never infer payer from uploader or card digits.
-4. For **every receipt in a currency different from settlement**, ask **1 foreign unit = X settlement units**, even if all receipts use the same foreign currency. Rates must be positive and confirmed; transaction-specific rates are allowed. Record which receipts each rate applies to.
+4. For every receipt in a currency different from settlement, ask 1 foreign unit = X settlement units, even if all receipts use the same foreign currency. Rates must be positive and confirmed; transaction-specific rates are allowed. Record which receipts each rate applies to.
 5. Resolve unreadable receipts by manual entry or explicit exclusion. Manual entries have no fabricated source photo. Unknown optional merchant/place metadata need not block otherwise valid expenses.
 
 Present the final reviewed ledger and coverage limits. Require confirmation of amounts, currencies, payers, classifications, duplicates and rates. Unresolved known expenses block final settlement unless explicitly excluded with acceptance that omitted costs can change the result. Put that qualification prominently in the report. Zero-sum never means all receipts were found.
@@ -116,7 +118,7 @@ Offer nonempty place albums plus Group Photos and Scenery. Preserve approved sco
 delegate --target photo-agent --instruction 'Prepare without writing the exact user-selected trip albums from supplied dates, timezone, scope and confirmed places or group/scenery content. Return each proposed name, actual matched count and real search result reference. Use result references rather than preview IDs. Check whether confirmed receipt IDs can actually be excluded using supported operations. Do not invent subtraction or filtering Actions. If exclusion or scope preservation cannot be verified, report it and wait. Report selections beyond the documented 1000-photo automatic query cap; never silently truncate. List existing albums with the same exact proposed names to avoid duplicates. Report known album visibility or mark it unknown.'
 ```
 
-If receipt exclusion is unsupported, ask **skip** or **include receipts knowingly**; do not write until answered. If scope/cap limits cannot be met, ask for smaller selections or skip. Confirm final names, selection and any known/unknown visibility before creating:
+If receipt exclusion is unsupported, ask skip or include receipts knowingly; do not write until answered. If scope/cap limits cannot be met, ask for smaller selections or skip. Confirm final names, selection and any known/unknown visibility before creating:
 
 ```text
 delegate --target photo-agent --instruction 'Create only the confirmed regular albums using the exact real search references and names supplied with this task, subject to platform approval. Preserve scope and receipt-inclusion decisions. Do not substitute preview IDs, overwrite existing albums or retry an uncertain creation. Return each actual created/blocked status, real album ID and photo count; explicitly identify failures and unknown outcomes.'
@@ -128,10 +130,10 @@ Track verified albums; never recreate them automatically. On a name collision, a
 
 Use public terminal `delegation_result` and business facts in summary/result, not an assumed fixed result schema or the expert's internal CLI envelope.
 
-- **completed**: proceed only with verified downstream facts. An empty result object alone is not no matches. Missing paths/counts/references stop dependent work.
-- **failed**: name the step/expert and safe error facts. Preserve confirmed inputs and verified outputs. An album failure does not discard a saved report.
-- **cancelled**: report incomplete; no automatic write retry.
-- **waiting_user** and **waiting_approval**: interruption/resume flows, not fabricated terminal JSON. Wait for the same delegation; no parallel replacement. Conversational assent is not platform approval. Check the eventual terminal result.
+- completed: proceed only with verified downstream facts. An empty result object alone is not no matches. Missing paths/counts/references stop dependent work.
+- failed: name the step/expert and safe error facts. Preserve confirmed inputs and verified outputs. An album failure does not discard a saved report.
+- cancelled: report incomplete; no automatic write retry.
+- waiting_user and waiting_approval: interruption/resume flows, not fabricated terminal JSON. Wait for the same delegation; no parallel replacement. Conversational assent is not platform approval. Check the eventual terminal result.
 
 Within this conversation retain scope, reviewed ledger revision, coverage gaps, verified report path and created album IDs. On repeat requests ask which changed/unfinished part to run. Across conversations ask for prior output information; do not claim persistent state. After an interrupted write, establish existing outcomes using supported reads where possible; if unknown, explain duplicate risk and get the user's decision before another write.
 
