@@ -4,56 +4,56 @@
 
 ## 1. What does the Skill do?
 
-It turns receipt photos already in the NAS photo library into a settle-up report showing exactly who pays whom, then organizes the trip photos into albums.
+It turns receipt photos snapped during a trip into a settle-up report showing exactly who pays whom, then organizes the trip photos into albums.
 
 ## 2. Who is the target user and problem?
 
-Friends, roommates and families who travel together and keep photos on a UGREEN NAS. After a trip, receipts are buried among hundreds of photos. Someone spends an evening typing them into a spreadsheet and arguing over rounding and currency, while the photos stay unsorted.
+The target users are roommates and friend groups who share a UGREEN NAS. The real pain isn't the math; it's the awkwardness. People hesitate to ask friends for money they're owed, and those who owe feel uneasy without knowing the exact amount.
 
 ## 3. What is your proposed solution?
 
-One request, such as "settle up our Banff trip, Oct 3–7", finds the receipts, reads them locally, and asks only what AI cannot know: who paid, personal items, exchange rates. It computes balances with an auditable rule, saves the report, and builds trip albums.
+No one wants to keep score on vacation. Members only snap each receipt and upload their photos to the shared album. Afterwards, one request finds the receipts, reads them locally, asks only what AI cannot know, and saves a neutral, traceable report, so the report does the asking.
 
 ## 4. What is the Core User Flow?
 
-1. The user gives dates, members, currency, and whether one person paid everything.
-2. The Skill lists detected receipts; the user removes false hits.
-3. In a review table, the user confirms flagged values, duplicates, payers, personal receipts and rates.
+1. The user gives dates, members, currency, and the payment mode.
+2. The Skill builds a day × place index of the trip photos and finds the receipts.
+3. A review table flags gaps such as "Lake Louise: 87 photos, 0 receipts", along with duplicates, payers, personal items and rates.
 4. The report is saved, with the final transfers on top.
-5. Albums are proposed, confirmed and created.
+5. Albums are created from the same index.
 
 ## 5. What substantive difference does your idea offer?
 
-Splitting apps need manual entry. Chatbots cannot see your photos and may guess silently. Trip Wrap-Up reads receipts where they already live and traces every number to a source photo. It never invents payers or rates, and it checks that all balances sum to zero. Money and memories are wrapped up together.
+ChatGPT can do the math once you've done the work. Trip Wrap-Up does the work: it finds receipts across everyone's uploads, uses photos as reminders for missing receipts, and traces every amount to its source photo. It never guesses, and its data never leaves home.
 
 ## 6. Which UGREEN AI NAS capabilities will be used, and at which step?
 
-- **Find receipts:** photo-agent (`ug-photo` search-picture with OCR-text and capture-date filters, plus search-screen).
-- **Read receipts:** document-agent (`ug-document` extract, receipt schema, dedupe), with photo-agent vision-ocr as the fallback.
+- **Trip index and receipt search:** photo-agent (`ug-photo` search-picture by capture time, upload time, location and OCR text, plus search-screen).
+- **Read receipts:** document-agent (`ug-document` extract, receipt schema, dedupe), with vision-ocr as the fallback.
 - **Save the report:** knowledge-agent (`ug-knowledge` save-text).
-- **Build albums:** photo-agent (location search, create-album).
+- **Albums:** photo-agent (create-album).
 
 ## 7. What was your technical approach?
 
-A Markdown-only Skill following the Uliya standard: SKILL.md delegates to three registered experts, with no scripts. Writes (the report and the albums) require platform approval. The settlement math uses integer cents, a fixed remainder rule, and greedy matching that needs at most n−1 transfers. It runs on the NAS local AI only, so trip data never leaves the NAS.
+A Markdown-only Skill following the Uliya standard: SKILL.md delegates to three registered experts, with no scripts. Photos without a capture time fall back to an upload-time window and are marked for the user to confirm. Writes require platform approval. The settlement uses integer cents, a fixed remainder rule, a zero-sum check, and greedy matching that needs at most n−1 transfers. Everything runs locally.
 
 ## 8. What is the current development status?
 
 - **Done:** SKILL.md and two references. The official checker returns static-pass with 0 errors and 0 warnings. The settlement rule was verified on 20,000 simulated trips.
-- **Pending NAS validation:** whether extract reads receipt images directly, OCR recall on real receipts, and the quality of location albums.
+- **Pending NAS validation:** whether extract reads images directly, OCR recall, and location grouping.
 
 ## 9. What is your final validation plan?
 
-- **Core test 1:** 4 members, 15 receipts among 300 photos, claim mode. Expect every receipt found, zero-sum balances, and at most 3 transfers.
-- **Core test 2:** one-payer mode with USD and CAD receipts, using a rate the user supplies.
-- **Edge case:** a blurry receipt plus a duplicate photo of another receipt. Both must be flagged, never guessed or double-counted.
+- **Core test 1:** 4 members, 15 receipts among 300 shared-album photos, claim mode. Expect every receipt found, zero-sum balances, and at most 3 transfers.
+- **Core test 2:** one-payer mode with USD and CAD receipts.
+- **Edge case:** a duplicate receipt, a blurry receipt, and a forwarded photo with no capture time. All three must be flagged.
 
 ## 10. Are there any known limitations?
 
-- Equal splits only; splits among part of the group are not supported yet.
-- Receipts must have been photographed.
-- There is no exchange-rate lookup capability, so users supply rates. In the future, the Skill could fetch the rate for the transaction date if UGREEN exposes one.
-- Leaving receipts out of albums depends on photo-agent support.
+- Every member must have an account on the same NAS.
+- Equal splits only.
+- Users supply exchange rates; automatic rates and card-statement reconciliation are future work.
+- Excluding receipts from albums depends on photo-agent support.
 
 ---
 

@@ -17,8 +17,12 @@ Fill every section with confirmed values only. Leave out a section only where th
 Self-check: sum of net balances = 0.00 ✔
 Rounding: [r] cent(s) of remainder assigned to [names], following the member order.
 
+## Coverage by day and place
+| Day | Place | Trip photos | Receipts |
+(mark every place that has photos but 0 receipts with ⚠️, and note what the user answered about it)
+
 ## Shared receipts
-| # | Date | Merchant | Original amount | Rate | Amount in settlement currency | Paid by | Source photo |
+| # | Date | Place | Merchant | Original amount | Rate | Amount in settlement currency | Paid by | Source photo |
 
 ## Personal receipts (not split)
 | # | Date | Merchant | Amount | Paid by | Source photo |
@@ -32,6 +36,8 @@ Rounding: [r] cent(s) of remainder assigned to [names], following the member ord
 - Values the user corrected by hand: [list]
 - Suspected duplicates the user dropped: [list]
 - Receipts that could not be read and were typed in by the user: [list]
+- Receipts entered by hand for places with no receipt photo: [list]
+- Date-uncertain photos the user confirmed: [list]
 - This report says who should pay whom. It does not move any money.
 ```
 

@@ -20,7 +20,7 @@ Only `SKILL.md` and `references/*.md` belong in the Skill ZIP. The proposal file
 
 ## Checks
 
-- Official UGOS Skill Creation Tool checker (kit v0.7.7, catalog 2.2.0): `static-pass`, with 0 errors and 0 warnings.
+- Official UGOS Skill Creation Tool checker (kit v0.7.7, catalog 2.2.0): `static-pass`, with 0 errors and 0 warnings (re-run after the PM-review update).
 - The settlement rule was simulated on 20,000 random trips. Balances always summed to zero, and no trip needed more than n − 1 transfers.
 
 A static pass does not prove the Skill runs on a NAS. Runtime validation is planned for the Finalist testing day.
