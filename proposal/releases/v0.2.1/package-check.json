@@ -9,8 +9,8 @@
   "zip_sha256": "4b5e650be6cc2505692cf55651e06c82f6d30fc21779b934a88298e664f97d67",
   "zip_sources_identical": true,
   "proposal_answer_words_whitespace": 433,
-  "proposal_pdf_bytes": 45481,
-  "proposal_pdf_sha256": "1cadde3b18d934a25393a3cf38faf9f9f0383fe73df45d1b3e80db8e615fb0ee",
+  "proposal_pdf_bytes": 55331,
+  "proposal_pdf_sha256": "985593d0759d0dd11b14b8b4f0eea9c217638212522eb61bcb7aa998946a709c",
   "nas_runtime_validated": false,
   "proposal_status": "proposal revision; original and earlier releases preserved",
   "source_files": {
@@ -21,6 +21,6 @@
     "references/settlement-math.md": "0c3a7049cb950f8657145e7c02db7b8cd14726bc736a75ac256a2554d65cdc7b",
     "references/validation-plan.md": "4f3eb3bfe48e86c030ba38116c1314e0c58253e66697e3d2b6584cc605bb5177"
   },
-  "proposal_docx_bytes": 39485,
-  "proposal_docx_sha256": "638cebd6c971794e1e6306406b1943a5e062138d63cad60778021fd57b99077f"
+  "proposal_docx_bytes": 35391,
+  "proposal_docx_sha256": "c9dc4505176431a0a67e08079748188156771fc7b5683395ac5ff58ccd244e67"
 }

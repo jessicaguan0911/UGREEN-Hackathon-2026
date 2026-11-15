@@ -1,6 +1,6 @@
 # Trip Wrap-Up
 
-UGREEN Hackathon 2026 · Open Innovation
+UGREEN Hackathon 2026 · Automate Your Workflow
 
 ## 1. What does the Skill do?
 

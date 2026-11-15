@@ -11,6 +11,7 @@ from html import escape
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+TRACK = 'Automate Your Workflow'
 
 
 def write_json(path, data):
@@ -50,7 +51,7 @@ def render_pdf(path, source):
     }
     story = [Paragraph('Trip Wrap-Up', styles['title']),
              Paragraph('UGREEN Hackathon 2026', styles['heading']),
-             Paragraph('Open Innovation', styles['note']),
+             Paragraph(TRACK, styles['note']),
              Spacer(1, 6)]
     pairs = proposal_parts(source)
     for index, (question, answer) in enumerate(pairs):
@@ -100,7 +101,7 @@ def render_docx(path, source):
     heading.paragraph_format.space_after = Pt(4)
     heading.paragraph_format.keep_with_next = True
     doc.add_paragraph('Trip Wrap-Up', style='Title')
-    doc.add_paragraph('UGREEN Hackathon 2026 · Open Innovation')
+    doc.add_paragraph(f'UGREEN Hackathon 2026 · {TRACK}')
     for index, (question, answer) in enumerate(proposal_parts(source)):
         p = doc.add_paragraph(question, style='Heading 2')
         if index == 5:
