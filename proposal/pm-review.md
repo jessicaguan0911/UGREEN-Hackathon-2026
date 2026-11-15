@@ -64,3 +64,8 @@ These are the answers to the 30 critical PM questions. Each decision will be app
 - **Out of scope:** families. "Families don't split bills."
 - **Q3 (overlap between NAS owners and people who split trip costs):** answered by this. The target is NAS owners who live or travel with peers, not households of parents and children.
 - **Update (assumption):** every trip member has an account on the same NAS. The owner creates accounts for friends if needed. Everyone uploads to the shared album and can open the saved report on the NAS, so no screenshots are needed. List this assumption under Known limitations.
+
+## Q4: Why not log expenses in Splitwise during the trip?
+- **Answer:** people forget, and nobody wants to keep score while on vacation.
+- **Positioning:** "During the trip, you do one thing: snap the receipt." Entering an amount, picking a payer and choosing a split in an app is much more effort, and it interrupts the trip.
+- **Pitch line:** "No one wants to keep score on vacation. Just snap the receipt; settle up at home."
