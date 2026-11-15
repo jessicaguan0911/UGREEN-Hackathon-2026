@@ -80,3 +80,11 @@ These are the answers to the 30 critical PM questions. Each decision will be app
 - Submit the current version first as a backup.
 - The entrant then rewrites the 10 PDF answers and the Devpost text in their own words. AI help is limited to spelling, grammar and word count.
 - The AI-tool disclosure must list every use honestly, including idea brainstorming.
+
+## Criteria review and version 0.2.0
+
+- The entrant requested implementation improvements against all four judging criteria.
+- The entrant confirmed Codex and the official UGREEN package as the only AI/Skill-assistance products used. Disclosure covers substantive drafting/revision, not only proofreading.
+- A separate v0.2.0 release adds search/extraction coverage gates, correct foreign-currency handling, missing-date fallback, bounded permissions, repeated-write handling, detailed validation and package disclosures.
+- Original Round 1 PDF/ZIP and proposal source remain unchanged. A separate technical proposal revision is labeled for entrant review. No Devpost entry was submitted by this work.
+- See `criteria-review.md` and the versioned validation evidence; static/model checks are not NAS runtime evidence.

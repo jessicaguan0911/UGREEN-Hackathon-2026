@@ -1,0 +1,42 @@
+{
+  "checkFormatVersion": "2.0.0",
+  "status": "static-pass",
+  "target": {
+    "skillName": "trip-wrap-up"
+  },
+  "catalog": {
+    "checkedVersion": "2.2.0"
+  },
+  "files": [
+    {
+      "path": "references/capability-boundaries.md",
+      "sha256": "44c60e2091cc6569f328e9addd2306168ae49a94ddf8897bca7e144a379d8032"
+    },
+    {
+      "path": "references/disclosures.md",
+      "sha256": "eb81b208eac09daa67ebbccf4bd75e67759cf6d34d59b35ad76a90577c03f01b"
+    },
+    {
+      "path": "references/report-template.md",
+      "sha256": "6b445e2f7c74074ba711f001da5e4986d74244544b85f0505a7985dea514062b"
+    },
+    {
+      "path": "references/settlement-math.md",
+      "sha256": "328d4a78872533dacd16424d5ae84ce22975b3426e9d1b424e6aa7fd73ddce7c"
+    },
+    {
+      "path": "references/validation-plan.md",
+      "sha256": "36714c69104e90a89c93434ba1374e4a61a5ee809454747847198d22470aed76"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "47e0d9242180bcb0a74232ad07abe936d5a67a4f0caac94f1e50051f0cce4590"
+    }
+  ],
+  "summary": {
+    "errors": 0,
+    "warnings": 0,
+    "info": 0
+  },
+  "diagnostics": []
+}

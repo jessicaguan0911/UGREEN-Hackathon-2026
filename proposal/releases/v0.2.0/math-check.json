@@ -1,0 +1,17 @@
+{
+  "status": "pass",
+  "scope": "exact-arithmetic model only; not NAS or LLM runtime validation",
+  "golden_settlement_cases": 7,
+  "conversion_rounding_checks": "pass",
+  "unsupported_input_checks": "pass",
+  "random_trips": 20000,
+  "seed": 20261115,
+  "invariants": [
+    "ledger/paid/share conservation",
+    "equal shares within one cent",
+    "fixed remainder order",
+    "per-member cash-flow settlement",
+    "positive non-self integer-cent transfers",
+    "at most n-1 transfers"
+  ]
+}
