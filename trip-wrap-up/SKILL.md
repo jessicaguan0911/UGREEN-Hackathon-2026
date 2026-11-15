@@ -28,7 +28,7 @@ Not supported in this version:
 - Reconciliation against card statements.
 - Payments, or messaging other people.
 
-The Skill never moves money and never shares anything outside the NAS.
+The Skill never moves money and never shares anything outside the NAS. Third-party and AI-tool disclosures are in [disclosures](references/disclosures.md).
 
 # Required input
 
